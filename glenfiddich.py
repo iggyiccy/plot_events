@@ -45,21 +45,10 @@ st.bar_chart(df_pct, use_container_width=True, height=600)
 # calculate the attendance percentage
 df_new = df_pct.copy()
 df_new['attendees'] = df_new['attendees']/123*100
+# change column name "attendees" to "attendance %"
+df_new.rename(columns={'attendees':'attendance %'}, inplace=True)
 # show the dataframe
 st.write(df_new)
 st.bar_chart(df_new, use_container_width=True, height=600)
 
-
-# # calculate each events attendance percentage and save to a new dataframe
-# df_percentage = pd.DataFrame(df_count.sum(axis=0)/123*100)
-
-# # show the percentage of each events attendance
-# st.write(df_percentage)
-
-# st.bar_chart(df_percentage, use_container_width=True , height=600)
-
-
-
-# # plot and only show the percentage of each column in the dataframe
-# st.bar_chart(df_count, use_container_width=True)
 
