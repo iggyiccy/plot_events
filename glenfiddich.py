@@ -34,9 +34,9 @@ df_count['RUNWAY EVENT 10PM-11:59PM 20220512'] = df_count['RUNWAY EVENT 10PM-11:
 df_count['LATE REGISTRATIONS 20220513'] = df_count['LATE REGISTRATIONS 20220513']/123*100
 
 # save events name in a list
-events = ['CLIENT ONBOARDING SESSION 20220505', 'POWERHOUSE SENDS EDM 6AM-1PM 20220511', 'POWERHOUSE SENDS EDM 5PM-11PM 20220511', 'RUNWAY EVENT 12AM-2PM-20220512', 'RUNWAY EVENT 10PM-11:59PM 20220512', 'LATE REGISTRATIONS 20220513']
+events = ['POWERHOUSE SENDS EDM 6AM-1PM 20220511', 'POWERHOUSE SENDS EDM 5PM-11PM 20220511', 'RUNWAY EVENT 12AM-2PM-20220512', 'RUNWAY EVENT 10PM-11:59PM 20220512', 'LATE REGISTRATIONS 20220513']
 # save number of attendees in a list
-attendees = [4 , 4, 19, 57, 27, 12]
+attendees = [24 , 4, 57, 27, 12]
 # convert list to dataframe
 df_pct = pd.DataFrame(attendees, index=events, columns=['attendees'])
 # show the dataframe
@@ -50,5 +50,3 @@ df_new.rename(columns={'attendees':'attendance %'}, inplace=True)
 # show the dataframe
 st.write(df_new)
 st.bar_chart(df_new, use_container_width=True, height=600)
-
-
