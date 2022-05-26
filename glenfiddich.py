@@ -54,10 +54,6 @@ chart = alt.Chart(source).mark_bar().encode(
 ).properties(
     title='Events Attendees', 
     height=600)
-# chart = alt.Chart(df_pct).mark_bar().encode(
-#     # x=alt.X('events:O', title='Events'),
-#     y=alt.Y('attendees:Q', title="Number of Attendees")
-# )
 # show the dataframe
 st.write(df_pct)
 # st.bar_chart(df_pct, use_container_width=True, height=600)
