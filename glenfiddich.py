@@ -1,6 +1,8 @@
+from turtle import title
 import streamlit as st 
 import pandas as pd
 import numpy as np
+import altair as alt
 
 
 st.title('📆 Glenfiddich Events Register 📋')
@@ -39,14 +41,47 @@ events = ['POWERHOUSE SENDS EDM 6AM-1PM 20220511', 'POWERHOUSE SENDS EDM 5PM-11P
 attendees = [24 , 4, 57, 27, 12]
 # convert list to dataframe
 df_pct = pd.DataFrame(attendees, index=events, columns=['attendees'])
+# use altair to create a bar chart
+source = pd.DataFrame({
+    'events': events,
+    'attendees': attendees
+})
+
+chart = alt.Chart(source).mark_bar().encode(
+    x=alt.X('events:O', axis=alt.Axis(title='Events'), sort=None),
+    y='attendees', 
+    color='events'
+).properties(
+    title='Events Attendees', 
+    height=600)
+# chart = alt.Chart(df_pct).mark_bar().encode(
+#     # x=alt.X('events:O', title='Events'),
+#     y=alt.Y('attendees:Q', title="Number of Attendees")
+# )
 # show the dataframe
 st.write(df_pct)
-st.bar_chart(df_pct, use_container_width=True, height=600)
+# st.bar_chart(df_pct, use_container_width=True, height=600)
+st.altair_chart(chart, use_container_width=True)
 # calculate the attendance percentage
 df_new = df_pct.copy()
 df_new['attendees'] = df_new['attendees']/123*100
 # change column name "attendees" to "attendance %"
 df_new.rename(columns={'attendees':'attendance %'}, inplace=True)
+
+source_pct = pd.DataFrame({
+    'events': events,
+    'attendance': [19.5122, 3.2520, 46.3415, 21.9512, 9.7561]
+})
+
+chart_pct = alt.Chart(source_pct).mark_bar().encode(
+    x=alt.X('events:O', sort=None, axis=alt.Axis(title='Events')),
+    y='attendance',
+    color='events'
+).properties(
+    title='Events Attendance', 
+    height=600)
 # show the dataframe
 st.write(df_new)
-st.bar_chart(df_new, use_container_width=True, height=600)
+# st.bar_chart(df_new, use_container_width=True, height=600)
+st.altair_chart(chart_pct, use_container_width=True)
+
